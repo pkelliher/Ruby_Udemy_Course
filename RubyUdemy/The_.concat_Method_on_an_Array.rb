@@ -15,3 +15,4 @@ def custom_concat(arr1, arr2)
 end
 
 p custom_concat(a, b)
+p a
