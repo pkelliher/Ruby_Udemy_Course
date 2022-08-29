@@ -10,6 +10,5 @@
 # greeter(&phrase)
 
 hi = Proc.new { puts "Hi there"}
-
 hi.call
 # 5.times(&hi)
