@@ -1,20 +1,38 @@
+require_relative = "app_store"
+
 class Gadget
 
-  #attr_writer :password
-  attr_reader :production_number
-  attr_accessor :username, :password
+  attr_reader :production_number, :apps
+  attr_accessor :username
 
 
   def initialize(username, password)
     @username = username
     @password = password
     @production_number = generate_production_number
+    @apps = []
   end
 
   def to_s
-    "Gadget #{@production_number} has the username #{@username}.
+    "Gadget #{production_number} has the username #{username}.
     It is made from the #{self.class} class and it
-    has the ID #{self.object_id}."
+    has the ID #{object_id}."
+  end
+
+  def install_app(name)
+    app = AppStore.find_app(name)
+    @apps << app unless @apps.include?(app)
+  end
+
+  def delete_app(name)
+    app = apps.find { |installed_app| installed_app.name == name }
+    apps.delete(app) unless app.nil?
+  end
+
+  def reset(username, password)
+      self.username = username
+      self.password = password
+      self.apps = []
   end
 
   def password=(new_password)
@@ -22,6 +40,8 @@ class Gadget
   end
 
   private
+
+  attr_writer :apps
 
   def generate_production_number
     start_digits = rand(10000..99999)
@@ -38,11 +58,11 @@ class Gadget
 
 end
 
-phone = Gadget.new("rubytime123", "patrick123")
-puts phone.password
+g = Gadget.new("Patrick", "Password123")
+p g.apps
 
-phone.password = 123
-puts phone.password
+g.install_app(:Chat)
+g.install_app(:Twitter)
+p g.apps
 
-phone.password = "test123"
-puts phone.password
+g.delete_apps(:Chat)
