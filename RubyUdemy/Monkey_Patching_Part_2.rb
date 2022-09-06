@@ -53,6 +53,3 @@ end
 5.times { |i| puts i }
 puts
 5.custom_times { |i| puts i }
-store = 5
-
-store.methods

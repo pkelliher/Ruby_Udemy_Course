@@ -41,3 +41,5 @@ b = Widget.new
 
 puts Widget.counter
 puts Product.counter
+
+c = Thingamaji.new
